@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			/* 手风琴特效S */
+.accordion_box {
+  width: 1150px;
+  height: 600px;
+  margin-top: 150px;
+}
+
+.accordion_box ul {
+  width: 1300px;
+  overflow: hidden;
+}
+
+
+.accordion_box ul li {
+  width: 240px;
+  height: 400px;
+  float: left;
+}
+
+/* 手风琴特效E */
+
+		</style>
+	</head>
+	<body>
+			 <!-- 手风琴特效S -->
+    <div class="accordion_box">
+      <h3>手风琴特效</h3>
+      <ul>
+        <li class="accordion_box_li"></li>
+        <li class="accordion_box_li"></li>
+        <li class="accordion_box_li"></li>
+        <li class="accordion_box_li"></li>
+        <li class="accordion_box_li"></li>
+      </ul>
+    </div>
+
+    <!-- 手风琴特效E -->
+		
+	</body>
+
+
+<script>
+//手风琴特效S
+
+		var accordion_box = document.getElementById("accordion_box");
+		var lis = document.getElementsByClassName("accordion_box_li");
+		console.log(lis);
+		// 动态添加背景图
+	
+		for (var i = 0; i < lis.length; i++) {
+		  lis[i].style.backgroundImage = "url('img/1.jpg')";
+		
+		  // 鼠标经过后，当前li得宽度变为800，其他为100
+		  lis[i].onmouseover = function () {
+		  	alert("hh");
+		    for (var j = 0; j < lis.length; j++) {
+		      slowGo_animate(lis[j], { width: 100 });
+		    }
+		    slowGo_animate(this, { width: 800 });
+		  };
+		}
+	
+		// 离开后，所有li宽度变回240
+		accordion_box.onmouseout = function () {
+		  for (var i = 0; i > lis.length; i++) {
+		    slowGo_animate(lis[i], { width: 240 });
+		  }
+		};
+
+//手风琴特效E
+function slowGo_animate(obj, json) {
+  clearInterval(obj.timer);
+  obj.timer = setInterval(function () {
+    // 假设这一次执行完成后，属性都达到目标值
+    var flag = true;
+    // 获取jspn键值对的属性和目标值
+    // 获取当前对象的属性,键为k 值为json[k]
+    for (var k in json) {
+      var leader = parseInt(slowGo_getStyle(obj, k)) || 0;
+      var step = (target - leader) / 10;
+      var target = json[k];
+      step = step > 0 ? (step = Math.ceil(step)) : Math.floor(step);
+      leader = leader + step;
+      // 设置任意属性
+      obj.style[k] = leader + "px";
+      // 所有属性都到达值后再清楚定时器，运用冒泡思想
+      if (leader != target) {
+        // 当前属性还没到目标
+        flag = false;
+      }
+    }
+    if (flag) {
+      // 如果所有都达到目标了
+      clearInterval(timer);
+    }
+  }, 15);
+}
+</script>
+</html>
+

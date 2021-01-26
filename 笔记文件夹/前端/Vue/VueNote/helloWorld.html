@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
+		<!--注意引入的路径，和人家同级就不要../-->
+		<!--1引入vue.js 2创建vue对象 el指定element data初始化数据  3.双向数据绑定 4显示数据 5理解vue的mvm实现-->
+		<script type="text/javascript" src="js/vue.js"></script>
+		<!--<script src="dist/vue.min.js"></script>-->
+	</head>
+	<div id="app"> <!--view -->
+		<input type="text" v-model="username"/>
+		<p>{{username}}</p>
+	</div>
+
+	<script type="text/javascript" >
+		var app = new Vue({//配置对象
+			el:"#app",//element元素
+			data:{//数据(model)
+				username:'Hello Vue'
+			}
+		})
+	</script>
+	<body>
+	</body>
+</html>
